@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+        <!ELEMENT flat (room*, area?)>
+        <!ATTLIST flat
+                floor CDATA #REQUIRED
+                number CDATA #REQUIRED
+                >
+
+        <!ELEMENT room EMPTY>
+        <!ATTLIST room
+                height CDATA #REQUIRED
+                width CDATA #REQUIRED
+                >
+
+        <!ELEMENT area (#PCDATA)>
