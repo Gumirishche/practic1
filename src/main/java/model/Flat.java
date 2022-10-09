@@ -11,7 +11,8 @@ public class Flat {
         this.number = number;
     }
 
-    public Flat(){}
+    public Flat() {
+    }
 
     public String getFloor() {
         return floor;

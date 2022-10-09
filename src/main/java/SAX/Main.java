@@ -1,4 +1,5 @@
-import SAX.Reader;
+package SAX;
+
 import model.Flat;
 import model.Room;
 import org.xml.sax.SAXException;
@@ -24,6 +25,7 @@ public class Main {
         Flat f = new Flat();
         Room r = new Room();
         int area = 0;
+        System.out.print("Введите название файла:");
         String s = new Main().scan();
         System.out.println(s);
         Reader handler = new Reader();
