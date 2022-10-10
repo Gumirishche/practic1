@@ -54,10 +54,10 @@ public class Main {
                 String name = new DOM.Main().scan();
                 try {
                     DocumentBuilderFactory factoryD = DocumentBuilderFactory.newInstance();
-                    DocumentBuilder builder1 = null;
-                    builder1 = factoryD.newDocumentBuilder();
-                    Document document1 = builder.parse(s);
-                    NodeList areaL = document1.getElementsByTagName("flat");
+                    builder = null;
+                    builder = factoryD.newDocumentBuilder();
+                    document = builder.parse(s);
+                    NodeList areaL = document.getElementsByTagName("flat");
                     Element ar = null;
                     ar = (Element) areaL.item(0);
                     Node areaNode = ar.getElementsByTagName("area").item(0).getFirstChild();

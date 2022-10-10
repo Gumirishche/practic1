@@ -60,7 +60,7 @@ public class ReaderDOM {
             if (attr.getName().equals("height")){
                 h=attr.getValue();
             }
-            if (attr.getName().equals("wight")){
+            if (attr.getName().equals("width")){
                 w=attr.getValue();
                 flat.setRooms(new Room(w,h));
             }
