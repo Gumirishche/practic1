@@ -23,7 +23,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        ArrayList<Flat> flats;
+        Flat flat;
         ArrayList<Room> rooms;
         Flat f = new Flat();
         Room r = new Room();
@@ -31,20 +31,15 @@ public class Main {
         System.out.print("Введите название файла:");
         String s = new DOM.Main().scan();
         System.out.println(s);
-        Reader handler = new Reader();
-        SAXParserFactory factory = SAXParserFactory.newInstance();
-        SAXParser parser = null;
         try {
-            parser = factory.newSAXParser();
-            parser.parse(s, handler);
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
-        }
-        flats = handler.getFlats();
-        int sizeF = flats.size();
-        for (Flat flat : flats) {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document document = builder.parse(s);
+            ReaderDOM obj = new ReaderDOM();
+            obj.myPrint(document);
+            System.out.println("area="+obj.getArea());
+            flat = obj.getFlat();
             rooms = flat.getRooms();
-            int sizeR = rooms.size();
             for (Room room : rooms) {
                 area = area + Integer.parseInt(room.getHeight()) * Integer.parseInt(room.getWidth());
             }
@@ -53,16 +48,16 @@ public class Main {
                 System.out.println("height:" + room.getHeight() + ",  width:" + room.getWidth() + "\n");
             }
             System.out.println("area:" + area);
-            if (area != handler.getArea()) {
+            if (area != obj.getArea()) {
                 System.out.println("Площадь в xml не соответсвует действительности");
                 System.out.print("Введите название исправленного файла:");
                 String name = new DOM.Main().scan();
                 try {
                     DocumentBuilderFactory factoryD = DocumentBuilderFactory.newInstance();
-                    DocumentBuilder builder = null;
-                    builder = factoryD.newDocumentBuilder();
-                    Document document = builder.parse(s);
-                    NodeList areaL = document.getElementsByTagName("flat");
+                    DocumentBuilder builder1 = null;
+                    builder1 = factoryD.newDocumentBuilder();
+                    Document document1 = builder.parse(s);
+                    NodeList areaL = document1.getElementsByTagName("flat");
                     Element ar = null;
                     ar = (Element) areaL.item(0);
                     Node areaNode = ar.getElementsByTagName("area").item(0).getFirstChild();
@@ -86,6 +81,19 @@ public class Main {
                     throw new RuntimeException(e);
                 }
             }
+
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
         }
+        /*Reader handler = new Reader();
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        SAXParser parser = null;
+        try {
+            parser = factory.newSAXParser();
+            parser.parse(s, handler);
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            e.printStackTrace();
+        }*/
+
     }
 }

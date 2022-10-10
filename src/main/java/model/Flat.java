@@ -14,6 +14,14 @@ public class Flat {
     public Flat() {
     }
 
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     public String getFloor() {
         return floor;
     }
