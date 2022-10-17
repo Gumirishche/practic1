@@ -1,6 +1,5 @@
 package DOM;
 
-import SAX.Reader;
 import model.Flat;
 import model.Room;
 import org.w3c.dom.*;
@@ -25,8 +24,6 @@ public class Main {
     public static void main(String[] args) {
         Flat flat;
         ArrayList<Room> rooms;
-        Flat f = new Flat();
-        Room r = new Room();
         int area = 0;
         System.out.print("Введите название файла:");
         String s = new DOM.Main().scan();
@@ -54,11 +51,10 @@ public class Main {
                 String name = new DOM.Main().scan();
                 try {
                     DocumentBuilderFactory factoryD = DocumentBuilderFactory.newInstance();
-                    builder = null;
                     builder = factoryD.newDocumentBuilder();
                     document = builder.parse(s);
                     NodeList areaL = document.getElementsByTagName("flat");
-                    Element ar = null;
+                    Element ar;
                     ar = (Element) areaL.item(0);
                     Node areaNode = ar.getElementsByTagName("area").item(0).getFirstChild();
                     areaNode.setNodeValue(Integer.toString(area));
@@ -85,15 +81,6 @@ public class Main {
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
-        /*Reader handler = new Reader();
-        SAXParserFactory factory = SAXParserFactory.newInstance();
-        SAXParser parser = null;
-        try {
-            parser = factory.newSAXParser();
-            parser.parse(s, handler);
-        } catch (ParserConfigurationException | SAXException | IOException e) {
-            e.printStackTrace();
-        }*/
 
     }
 }

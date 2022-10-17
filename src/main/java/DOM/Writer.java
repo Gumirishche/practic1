@@ -13,7 +13,7 @@ public class Writer {
     public static void main(String[] args) throws ParserConfigurationException {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = null;
+            DocumentBuilder builder;
             builder = factory.newDocumentBuilder();
             Document document = builder.parse("flat1.xml");
             DOMSource dom_source = new DOMSource(document);

@@ -22,15 +22,13 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<Flat> flats;
         ArrayList<Room> rooms;
-        Flat f = new Flat();
-        Room r = new Room();
         int area = 0;
         System.out.print("Введите название файла:");
         String s = new Main().scan();
         System.out.println(s);
         Reader handler = new Reader();
         SAXParserFactory factory = SAXParserFactory.newInstance();
-        SAXParser parser = null;
+        SAXParser parser;
         try {
             parser = factory.newSAXParser();
             parser.parse(s, handler);
@@ -38,10 +36,8 @@ public class Main {
             e.printStackTrace();
         }
         flats = handler.getFlats();
-        int sizeF = flats.size();
         for (Flat flat : flats) {
             rooms = flat.getRooms();
-            int sizeR = rooms.size();
             for (Room room : rooms) {
                 area = area + Integer.parseInt(room.getHeight()) * Integer.parseInt(room.getWidth());
             }

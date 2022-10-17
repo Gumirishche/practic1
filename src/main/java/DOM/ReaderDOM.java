@@ -15,11 +15,8 @@ public class ReaderDOM {
 
     private final Flat flat = new Flat();
 
-    ArrayList<Room> rooms = new ArrayList<>();
     String h,w;
     private int area;
-    private int indexFlat = 0;
-    private int indexRoom;
     private static final String[] TYPE_NAMES = {"ELEMENT_NODE", "ATTRIBUTE_NODE",
             "TEXT_NODE", "CDATA_SECTION_NODE", "ENTITY_REFERENCE_NODE", "ENTITY_NODE",
             "PROCESSING_INSTRUCTION_NODE", "COMMENT_NODE", "DOCUMENT_NODE",

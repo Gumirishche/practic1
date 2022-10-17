@@ -17,8 +17,6 @@ public class Reader extends DefaultHandler {
 
     private final ArrayList<Flat> flats = new ArrayList<>();
 
-    private final ArrayList<String> sums = new ArrayList<>();
-
     private int area;
     private int indexFlat = 0;
     private int indexRoom;
@@ -31,15 +29,15 @@ public class Reader extends DefaultHandler {
         return flats;
     }
 
-    public void startDocument() throws SAXException {
+    public void startDocument() {
         printString("Начало документа");
     }
 
-    public void endDocument() throws SAXException {
+    public void endDocument() {
         printString("Конец документа");
     }
 
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String qName, Attributes attributes) {
         indent += INDENT;
         printString("Элемент " + qName + ":");
         if (qName.equals("flat")) {
@@ -63,24 +61,24 @@ public class Reader extends DefaultHandler {
     }
 
     public void endElement(String uri, String localName,
-                           String qName) throws SAXException {
+                           String qName) {
         printString("Конец элемента " + qName + ".");
         indent -= INDENT;
     }
 
-    public void warning(SAXParseException e) throws SAXException {
+    public void warning(SAXParseException e) {
         System.out.println("Предупреждение :" + e.getPublicId());
     }
 
-    public void error(SAXParseException e) throws SAXException {
+    public void error(SAXParseException e) {
         System.out.println("Ошибка :" + e.getPublicId());
     }
 
-    public void fatalError(SAXParseException e) throws SAXException {
+    public void fatalError(SAXParseException e) {
         System.out.println("Фатальная ошибка :" + e.getPublicId());
     }
 
-    public void characters(char[] ch, int start, int length) throws SAXException {
+    public void characters(char[] ch, int start, int length) {
         indent += INDENT;
         String str = new String(ch, start, length);
         printString(str);
@@ -104,7 +102,7 @@ public class Reader extends DefaultHandler {
     public static void main(String[] args) {
         DefaultHandler handler = new Reader();
         SAXParserFactory factory = SAXParserFactory.newInstance();
-        SAXParser parser = null;
+        SAXParser parser;
         try {
             parser = factory.newSAXParser();
             parser.parse("src/main/resources/flat.xml", handler);
