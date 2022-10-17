@@ -8,9 +8,6 @@ public class Room {
         this.width = width;
     }
 
-    public Room() {
-    }
-
     public String getWidth() {
         return width;
     }
