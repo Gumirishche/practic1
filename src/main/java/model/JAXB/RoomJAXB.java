@@ -1,17 +1,18 @@
 package model.JAXB;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import jakarta.xml.bind.annotation.XmlAttribute;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "Room")
+@XmlType(propOrder = {"width", "height"})
 public class RoomJAXB {
     private String width, height;
 
     public String getWidth() {
         return width;
     }
-    @XmlElement(name = "width")
+    @XmlAttribute(name = "width")
     public void setWidth(String width) {
         this.width = width;
     }
@@ -19,7 +20,7 @@ public class RoomJAXB {
     public String getHeight() {
         return height;
     }
-    @XmlElement(name = "height")
+    @XmlAttribute(name = "height")
     public void setHeight(String height) {
         this.height = height;
     }

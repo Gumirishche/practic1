@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE flat SYSTEM "D:\IdeaProjects\practic1\flat.dtd">
 <flat floor="2" number="13">
     <room height="12" width="13"/>
     <room height="10" width="14"/>
