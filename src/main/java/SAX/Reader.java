@@ -9,24 +9,22 @@ import org.xml.sax.SAXParseException;
 
 import javax.xml.parsers.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Reader extends DefaultHandler {
     private int indent = 0;
     final static int INDENT = 4;
 
-    private final ArrayList<Flat> flats = new ArrayList<>();
+    private final Flat flat = new Flat();
 
     private int area;
-    private int indexFlat = 0;
-    private int indexRoom;
+    private int indexRoom = -1;
 
     public int getArea() {
         return area;
     }
 
-    public ArrayList<Flat> getFlats() {
-        return flats;
+    public Flat getFlat() {
+        return flat;
     }
 
     public void startDocument() {
@@ -40,23 +38,20 @@ public class Reader extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) {
         indent += INDENT;
         printString("Элемент " + qName + ":");
-        if (qName.equals("flat")) {
-            indexRoom = indexFlat;
-            indexFlat++;
-            String floor = attributes.getValue("floor");
-            String number = attributes.getValue("number");
-            printString("Floor " + ":" + floor);
-            printString("Number " + ":" + number);
-            flats.add(new Flat(floor, number));
-            System.out.println(indexFlat);
-        }
+        String floor = attributes.getValue("floor");
+        String number = attributes.getValue("number");
+        printString("Floor " + ":" + floor);
+        printString("Number " + ":" + number);
+        flat.setFloor(floor);
+        flat.setNumber(number);
         if (qName.equals("room")) {
+            indexRoom++;
             String height = attributes.getValue("height");
             String width = attributes.getValue("width");
             printString("Height " + ":" + height);
             printString("Width " + ":" + width);
             System.out.println(indexRoom);
-            flats.get(indexRoom).setRooms(new Room(width, height));
+            flat.getRooms().add(indexRoom, new Room(width, height));
         }
     }
 
@@ -83,7 +78,9 @@ public class Reader extends DefaultHandler {
         String str = new String(ch, start, length);
         printString(str);
         System.out.println("str:" + str);
-        area = Integer.parseInt(str);
+        if (!str.trim().isEmpty()) {
+            area = Integer.parseInt(str.trim());
+        }
         indent -= INDENT;
     }
 

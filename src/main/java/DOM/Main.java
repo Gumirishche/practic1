@@ -26,7 +26,7 @@ public class Main {
         ArrayList<Room> rooms;
         int area = 0;
         System.out.print("Введите название файла:");
-        String s = new DOM.Main().scan();
+        String s = "src/main/resources/" + new DOM.Main().scan() + ".xml";
         System.out.println(s);
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -34,21 +34,19 @@ public class Main {
             Document document = builder.parse(s);
             ReaderDOM obj = new ReaderDOM();
             obj.myPrint(document);
-            System.out.println("area="+obj.getArea());
+            System.out.println("area=" + obj.getArea());
             flat = obj.getFlat();
             rooms = flat.getRooms();
-            for (Room room : rooms) {
-                area = area + Integer.parseInt(room.getHeight()) * Integer.parseInt(room.getWidth());
-            }
             System.out.println("Floor:" + flat.getFloor() + ", number:" + flat.getNumber() + "\n");
             for (Room room : rooms) {
+                area = area + Integer.parseInt(room.getHeight()) * Integer.parseInt(room.getWidth());
                 System.out.println("height:" + room.getHeight() + ",  width:" + room.getWidth() + "\n");
             }
             System.out.println("area:" + area);
             if (area != obj.getArea()) {
                 System.out.println("Площадь в xml не соответсвует действительности");
                 System.out.print("Введите название исправленного файла:");
-                String name = new DOM.Main().scan();
+                String name = "src/main/resources/" + new DOM.Main().scan() + ".xml";
                 try {
                     DocumentBuilderFactory factoryD = DocumentBuilderFactory.newInstance();
                     builder = factoryD.newDocumentBuilder();
@@ -63,15 +61,7 @@ public class Main {
                     TransformerFactory tFactory = TransformerFactory.newInstance();
                     Transformer transformer = tFactory.newTransformer(/* !!!! */);
 
-                    DocumentType docType = document.getDoctype();
-                    String systemID = docType.getSystemId();
-                    String publicID = docType.getPublicId();
-                    String res = publicID + "\" \"" + systemID;
-
-                    transformer.setOutputProperty(OutputKeys.DOCTYPE_PUBLIC, res);
-                    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                     transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-                    transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
                     transformer.transform(dom_source, out_stream);
                 } catch (IOException | TransformerException | SAXException | ParserConfigurationException e) {
                     throw new RuntimeException(e);

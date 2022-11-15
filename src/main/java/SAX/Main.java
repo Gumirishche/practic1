@@ -20,11 +20,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        ArrayList<Flat> flats;
+        Flat flat;
         ArrayList<Room> rooms;
         int area = 0;
         System.out.print("Введите название файла:");
-        String s = new Main().scan();
+        String s = "src/main/resources/" + new Main().scan() + ".xml";
         System.out.println(s);
         Reader handler = new Reader();
         SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -35,20 +35,20 @@ public class Main {
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
-        flats = handler.getFlats();
-        for (Flat flat : flats) {
-            rooms = flat.getRooms();
-            for (Room room : rooms) {
-                area = area + Integer.parseInt(room.getHeight()) * Integer.parseInt(room.getWidth());
-            }
-            System.out.println("Floor:" + flat.getFloor() + ", number:" + flat.getNumber() + "\n");
-            for (Room room : rooms) {
-                System.out.println("height:" + room.getHeight() + ",  width:" + room.getWidth() + "\n");
-            }
-            System.out.println("area:" + area);
-            if (area != handler.getArea()) {
-                System.out.println("Площадь в xml не соответсвует действительности");
-            }
+        flat = handler.getFlat();
+        rooms = flat.getRooms();
+        for (Room room : rooms) {
+            area = area + Integer.parseInt(room.getHeight()) * Integer.parseInt(room.getWidth());
+        }
+        System.out.println("Floor:" + flat.getFloor() + ", number:" + flat.getNumber() + "\n");
+        for (Room room : rooms) {
+            System.out.println("height:" + room.getHeight() + ",  width:" + room.getWidth() + "\n");
+        }
+        System.out.println("area:" + area);
+        if (area != handler.getArea()) {
+            System.out.println("Area посчитанная:" + area);
+            System.out.println("Area считанная:" + handler.getArea());
+            System.out.println("Площадь в xml не соответсвует действительности");
         }
     }
 }

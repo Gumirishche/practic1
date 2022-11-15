@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 
 @XmlRootElement(name = "flat")
-@XmlType(propOrder = {"floor","number","area"})
+@XmlType(propOrder = {"floor", "number", "rooms", "area"})
 public class FlatJAXB {
     private String floor, number, area;
 
-    private ArrayList<RoomJAXB> rooms= new ArrayList<>();
+    private ArrayList<RoomJAXB> rooms;
 
     public String getArea() {
         return area;
@@ -27,6 +27,7 @@ public class FlatJAXB {
     public String getFloor() {
         return floor;
     }
+
     @XmlAttribute(name = "floor")
     public void setFloor(String floor) {
         this.floor = floor;
@@ -35,6 +36,7 @@ public class FlatJAXB {
     public String getNumber() {
         return number;
     }
+
     @XmlAttribute(name = "number")
     public void setNumber(String number) {
         this.number = number;
@@ -44,7 +46,7 @@ public class FlatJAXB {
         return rooms;
     }
 
-    @XmlElement(name="room")
+    @XmlElement(name = "room")
     public void setRooms(ArrayList<RoomJAXB> rooms) {
         this.rooms = rooms;
     }

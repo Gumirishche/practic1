@@ -4,6 +4,7 @@ import model.Flat;
 import model.Room;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
+
 import javax.xml.parsers.*;
 import java.io.IOException;
 import java.util.Objects;
@@ -14,7 +15,7 @@ public class ReaderDOM {
 
     private final Flat flat = new Flat();
 
-    String h,w;
+    String h, w;
     private int area;
     private static final String[] TYPE_NAMES = {"ELEMENT_NODE", "ATTRIBUTE_NODE",
             "TEXT_NODE", "CDATA_SECTION_NODE", "ENTITY_REFERENCE_NODE", "ENTITY_NODE",
@@ -47,25 +48,25 @@ public class ReaderDOM {
         for (int i = 0; i < nnm.getLength(); i++) {
             Attr attr = (Attr) nnm.item(i);
             printString("Attribute name = " + attr.getName() + ", value = " + attr.getValue());
-            if(attr.getName().equals("floor")){
+            if (attr.getName().equals("floor")) {
                 flat.setFloor(attr.getValue());
             }
-            if (attr.getName().equals("number")){
+            if (attr.getName().equals("number")) {
                 flat.setNumber(attr.getValue());
             }
-            if (attr.getName().equals("height")){
-                h=attr.getValue();
+            if (attr.getName().equals("height")) {
+                h = attr.getValue();
             }
-            if (attr.getName().equals("width")){
-                w=attr.getValue();
-                flat.setRooms(new Room(w,h));
+            if (attr.getName().equals("width")) {
+                w = attr.getValue();
+                flat.setRooms(new Room(w, h));
             }
         }
     }
 
     public void printTextInfo(Text text) {
         printString("Значение поля : " + text.getData());
-        if(!Objects.equals(text.getData().trim(), "")) {
+        if (!Objects.equals(text.getData().trim(), "")) {
             area = Integer.parseInt(text.getData());
         }
     }
@@ -105,7 +106,7 @@ public class ReaderDOM {
             Document document = builder.parse("flat.xml");
             ReaderDOM obj = new ReaderDOM();
             obj.myPrint(document);
-            System.out.println(obj.getArea() + "- area  "+ obj.getFlat().getNumber() + "-number  "+obj.getFlat().getFloor()+"-floor ");
+            System.out.println(obj.getArea() + "- area  " + obj.getFlat().getNumber() + "-number  " + obj.getFlat().getFloor() + "-floor ");
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }

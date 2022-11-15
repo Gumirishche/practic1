@@ -1,7 +1,8 @@
 package model;
 
 public class Room {
-    private String width, height;
+    private final String width;
+    private final String height;
 
     public Room(String width, String height) {
         this.height = height;

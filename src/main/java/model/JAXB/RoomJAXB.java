@@ -4,7 +4,7 @@ import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlRootElement;
 import jakarta.xml.bind.annotation.XmlType;
 
-@XmlRootElement(name = "Room")
+@XmlRootElement(name = "room")
 @XmlType(propOrder = {"width", "height"})
 public class RoomJAXB {
     private String width, height;
@@ -12,6 +12,7 @@ public class RoomJAXB {
     public String getWidth() {
         return width;
     }
+
     @XmlAttribute(name = "width")
     public void setWidth(String width) {
         this.width = width;
@@ -20,6 +21,7 @@ public class RoomJAXB {
     public String getHeight() {
         return height;
     }
+
     @XmlAttribute(name = "height")
     public void setHeight(String height) {
         this.height = height;

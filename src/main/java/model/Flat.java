@@ -6,13 +6,6 @@ public class Flat {
     private String floor, number;
     private final ArrayList<Room> rooms = new ArrayList<>();
 
-
-
-    public Flat(String floor, String number) {
-        this.floor = floor;
-        this.number = number;
-    }
-
     public Flat() {
     }
 
