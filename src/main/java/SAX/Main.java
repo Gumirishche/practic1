@@ -20,7 +20,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Flat flat;
         ArrayList<Room> rooms;
         int area = 0;
         System.out.print("Введите название файла:");
@@ -35,19 +34,17 @@ public class Main {
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
-        flat = handler.getFlat();
-        rooms = flat.getRooms();
+        rooms = handler.getFlat().getRooms();
         for (Room room : rooms) {
             area = area + Integer.parseInt(room.getHeight()) * Integer.parseInt(room.getWidth());
         }
-        System.out.println("Floor:" + flat.getFloor() + ", number:" + flat.getNumber() + "\n");
+        System.out.println("\n"+"Floor:" + handler.getFlat().getFloor() + ", number:" + handler.getFlat().getNumber());
         for (Room room : rooms) {
-            System.out.println("height:" + room.getHeight() + ",  width:" + room.getWidth() + "\n");
+            System.out.println("height:" + room.getHeight() + ",  width:" + room.getWidth());
         }
-        System.out.println("area:" + area);
+        System.out.println("Area посчитанная:" + area);
+        System.out.println("Area считанная:" + handler.getArea());
         if (area != handler.getArea()) {
-            System.out.println("Area посчитанная:" + area);
-            System.out.println("Area считанная:" + handler.getArea());
             System.out.println("Площадь в xml не соответсвует действительности");
         }
     }

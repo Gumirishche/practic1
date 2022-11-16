@@ -38,18 +38,16 @@ public class Reader extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) {
         indent += INDENT;
         printString("Элемент " + qName + ":");
+        if (qName.equals("flat")) {
         String floor = attributes.getValue("floor");
         String number = attributes.getValue("number");
-        printString("Floor " + ":" + floor);
-        printString("Number " + ":" + number);
         flat.setFloor(floor);
         flat.setNumber(number);
+        }
         if (qName.equals("room")) {
             indexRoom++;
             String height = attributes.getValue("height");
             String width = attributes.getValue("width");
-            printString("Height " + ":" + height);
-            printString("Width " + ":" + width);
             System.out.println(indexRoom);
             flat.getRooms().add(indexRoom, new Room(width, height));
         }
