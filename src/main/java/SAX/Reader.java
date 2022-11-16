@@ -75,7 +75,6 @@ public class Reader extends DefaultHandler {
         indent += INDENT;
         String str = new String(ch, start, length);
         printString(str);
-        System.out.println("str:" + str);
         if (!str.trim().isEmpty()) {
             area = Integer.parseInt(str.trim());
         }
