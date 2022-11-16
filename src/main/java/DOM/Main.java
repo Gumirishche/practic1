@@ -37,39 +37,38 @@ public class Main {
             System.out.println("area=" + obj.getArea());
             flat = obj.getFlat();
             rooms = flat.getRooms();
-            System.out.println("Floor:" + flat.getFloor() + ", number:" + flat.getNumber() + "\n");
+            System.out.println("\n" + "Floor:" + flat.getFloor() + ", number:" + flat.getNumber());
             for (Room room : rooms) {
                 area = area + Integer.parseInt(room.getHeight()) * Integer.parseInt(room.getWidth());
-                System.out.println("height:" + room.getHeight() + ",  width:" + room.getWidth() + "\n");
+                System.out.println("height:" + room.getHeight() + ",  width:" + room.getWidth());
             }
-            System.out.println("area:" + area);
+            System.out.println("Area посчитанная:" + area);
+            System.out.println("Area считанная:" + obj.getArea());
             if (area != obj.getArea()) {
                 System.out.println("Площадь в xml не соответсвует действительности");
                 System.out.print("Введите название исправленного файла:");
                 String name = "src/main/resources/" + new DOM.Main().scan() + ".xml";
-                try {
-                    DocumentBuilderFactory factoryD = DocumentBuilderFactory.newInstance();
-                    builder = factoryD.newDocumentBuilder();
-                    document = builder.parse(s);
-                    NodeList areaL = document.getElementsByTagName("flat");
-                    Element ar;
-                    ar = (Element) areaL.item(0);
-                    Node areaNode = ar.getElementsByTagName("area").item(0).getFirstChild();
-                    areaNode.setNodeValue(Integer.toString(area));
-                    DOMSource dom_source = new DOMSource(document);
-                    StreamResult out_stream = new StreamResult(name);
-                    TransformerFactory tFactory = TransformerFactory.newInstance();
-                    Transformer transformer = tFactory.newTransformer(/* !!!! */);
+                DocumentBuilderFactory factoryD = DocumentBuilderFactory.newInstance();
+                builder = factoryD.newDocumentBuilder();
+                document = builder.parse(s);
+                NodeList areaL = document.getElementsByTagName("flat");
+                Element ar;
+                ar = (Element) areaL.item(0);
+                Node areaNode = ar.getElementsByTagName("area").item(0).getFirstChild();
+                areaNode.setNodeValue(Integer.toString(area));
+                DOMSource dom_source = new DOMSource(document);
+                StreamResult out_stream = new StreamResult(name);
+                TransformerFactory tFactory = TransformerFactory.newInstance();
+                Transformer transformer = tFactory.newTransformer(/* !!!! */);
 
-                    transformer.setOutputProperty(OutputKeys.METHOD, "xml");
-                    transformer.transform(dom_source, out_stream);
-                } catch (IOException | TransformerException | SAXException | ParserConfigurationException e) {
-                    throw new RuntimeException(e);
-                }
+                transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+                transformer.transform(dom_source, out_stream);
             }
 
         } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
+        } catch (TransformerException e) {
+            throw new RuntimeException(e);
         }
 
     }
